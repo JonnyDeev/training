@@ -38,12 +38,24 @@ import { users } from "./data.js";
 //   return { fullName: `${user.first_name} ${user.last_name}` };
 // });
 
-const formattedUserNames = users.map(
-  ({ first_name, last_name, id, active, age }) => ({
-    id,
-    full_name: `${first_name} ${last_name}`,
-    age,
-    active,
-  })
-);
-console.log(formattedUserNames);
+export const fetchUsers = async () => {
+  setTimeout(() => {
+    try {
+      const fetchedUsers = users;
+      console.log(fetchedUsers);
+      return fetchedUsers;
+    } catch (error) {
+      console.error(error);
+    }
+  }, 1000);
+};
+
+// const formattedUserNames = users.map(
+//   ({ first_name, last_name, id, active, age }) => ({
+//     id,
+//     full_name: `${first_name} ${last_name}`,
+//     age,
+//     active,
+//   })
+// );
+// console.log(formattedUserNames);

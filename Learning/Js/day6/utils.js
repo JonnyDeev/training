@@ -6,7 +6,9 @@ import { users } from "./data.js";
 
 // getAverageAge(users)✅
 
-// formatUserNames(users)
+// formatUserNames(users) ✅
+
+// getUsersUnderAge(users)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,6 +17,7 @@ import { users } from "./data.js";
 //     return user.active === true;
 //   });
 //   console.log("current active users: ", activeUsers.length);
+//   console.log("current unactive users :", users.length - activeUsers.length);
 //   return activeUsers;
 // };
 
@@ -38,17 +41,17 @@ import { users } from "./data.js";
 //   return { fullName: `${user.first_name} ${user.last_name}` };
 // });
 
-export const fetchUsers = async () => {
-  setTimeout(() => {
-    try {
-      const fetchedUsers = users;
-      console.log(fetchedUsers);
-      return fetchedUsers;
-    } catch (error) {
-      console.error(error);
-    }
-  }, 1000);
-};
+// export const fetchUsers = async () => {
+//   setTimeout(() => {
+//     try {
+//       const fetchedUsers = users;
+//       console.log(fetchedUsers);
+//       return fetchedUsers;
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }, 1000);
+// };
 
 // const formattedUserNames = users.map(
 //   ({ first_name, last_name, id, active, age }) => ({
@@ -59,3 +62,32 @@ export const fetchUsers = async () => {
 //   })
 // );
 // console.log(formattedUserNames);
+
+// const getUsersUnderAge = (users, UnderAge) => {
+//   return users.filter((user) => {
+//     return user.age < UnderAge;
+//   });
+// };
+
+// console.log(
+//   users.filter((user) => {
+//     return user.age < 21;
+//   })
+// );
+
+const activeAndUnactiveUsers = (users) => {
+  const activeAndInactiveUsers = users.reduce(
+    (accum, currentUser) => {
+      if (currentUser.active == true) {
+        accum.active += 1;
+      } else {
+        accum.inactive += 1;
+      }
+      return accum;
+    },
+    { active: 0, inactive: 0 }
+  );
+  return activeAndInactiveUsers;
+};
+
+console.log(activeAndUnactiveUsers(users));

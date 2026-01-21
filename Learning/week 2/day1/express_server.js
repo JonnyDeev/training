@@ -2,7 +2,7 @@
 
 import express from "express";
 
-import { users } from "../Js/day6/data.js";
+import { users } from "../../Js/day6/data.js";
 
 //create express app
 const app = express();

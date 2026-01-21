@@ -1,4 +1,4 @@
-export default tasks = [
+let tasksList = [
   {
     id: 1,
     task: "Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.",
@@ -63,3 +63,5 @@ export default tasks = [
     completed: true,
   },
 ];
+
+export default tasksList;

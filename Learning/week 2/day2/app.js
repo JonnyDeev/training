@@ -12,16 +12,16 @@ app.get("/", (req, res) => {
 app.use(express.json());
 
 app.get("/tasks", (req, res) => {
+  let filteredTasks = tasks;
   const { completed } = req.query;
-
-// FIXME: QUERY PARAMS ARE NOT WORKING
-
-  if (completed) {
-    const filteredTasks = tasks.find((task) => {
-      task.completed === completed;
-    });
-    res.json(tasks);
+//Change condition for filtering to be done
+  if (completed !== undefined) {
+    // transform query param to a boolean value, so task.completed(boolean)
+    // and isCompleted(boolean) can be validated properly
+    const isCompleted = completed === "true";
+    filteredTasks = tasks.filter((task) => task.completed === isCompleted);
   }
+  res.json(filteredTasks);
 });
 
 app.post("/tasks", (req, res) => {

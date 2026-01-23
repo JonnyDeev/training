@@ -10,6 +10,7 @@ const FILE_PATH = "./tasks.json";
 
 const readTasks = async () => {
   const data = await fs.readFile(FILE_PATH, "utf-8");
+
   return JSON.parse(data);
 };
 
@@ -31,17 +32,33 @@ app.get("/tasks", async (req, res) => {
 app.post("/tasks", async (req, res) => {
   try {
     const tasks = await readTasks();
+    let tasksList = tasks;
+
+    console.log(tasksList);
     const { id = Date.now(), task, category, completed = false } = req.body;
     const newTask = { id, task, category, completed };
-    await writeTasks(newTask);
+    tasksList.push(newTask);
+    await writeTasks(tasksList);
     if (res.status === 201) {
-      res.json(newTask);
+      res.json(tasks);
     }
   } catch (error) {
     console.error(error);
   }
 });
-
+app.delete("/tasks/:id", async (req, res) => {
+    try {
+        const tasks = await readTasks();
+        const { id } = req.params;
+        const filteredTasks = tasks.filter((task) => task.id !== parseInt(id));
+        
+        await writeTasks(filteredTasks);
+        res.status(200).json(filteredTasks);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to delete task" });
+    }
+});
 app.listen(port, () => {
   console.log("App started on port ", port);
 });

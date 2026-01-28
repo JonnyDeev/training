@@ -3,6 +3,12 @@ const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const { PrismaPg } = require("@prisma/adapter-pg");
 
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+
+const prisma = new PrismaClient({ adapter });
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -21,12 +27,6 @@ const createNewPost = async (title, content) => {
 const createNewUser = async () => {};
 
 app.use(express.json());
-
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-});
-
-const prisma = new PrismaClient({ adapter });
 
 app.get("/", (req, res) => {
   res.send("App is working.");

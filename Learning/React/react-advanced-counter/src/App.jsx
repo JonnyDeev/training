@@ -58,9 +58,11 @@ function App() {
             </div>
           </div>
 
+          {/* TODO:Complete advanced counter */}
           {/* Advanced Counter */}
           <div className="bg-cyan-500 rounded-xl flex flex-col items-center justify-center w-1/2">
             <p>Simple Counter</p>
+            <input type="range" step={2} />
             <h4>0</h4>
             <button>Decrease</button>
             <button>Reset</button>
